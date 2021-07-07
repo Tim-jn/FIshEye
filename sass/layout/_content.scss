@@ -1,0 +1,147 @@
+// shared header
+
+#header {
+    img {
+        width: 150px;
+        height: 37.5px;
+        margin-bottom: 42px;
+    }
+}
+
+// shared artist display
+
+.artist {
+
+    .contact {
+        position: fixed;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);;
+        background-color: $color-primary;
+        color: #FFF;
+        padding: 5px 18px 7px 18px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+
+        @media all and (min-width: $breakpoint-desktop) {
+            position: relative;
+            width: 170px;
+            height: 79px;
+            font-size: 20px;
+            padding: 0;
+        }
+    }
+
+    /*img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 100%;
+        box-shadow: $profile-picture-shadow;
+    }*/
+}
+
+// shared work display
+
+#main {
+    margin-top: unset;
+
+    .galery {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5%;
+
+        .photo {
+            display: flex;
+            flex-direction: column;
+
+            .img {
+                width: 100%;
+                max-width: 350px;
+                height: 0;
+                min-height: 190px;
+                max-height: 300px;
+                object-fit: cover;
+                object-position: 50% 30%;
+                border-radius: 5px;
+                transition: 500ms ease;
+
+                @media all and (min-width: $breakpoint-desktop) {
+                    height: 100%;
+                }
+            }
+
+            .text {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 0.9rem;
+                color: $color-primary;
+                margin: 10px 0 10px 0;
+
+                @media all and (min-width: $breakpoint-desktop) {
+                    font-size: 24px;
+                    margin: 10px 0 30px 0;
+                }
+
+                .likes {
+                    font-weight: 500;
+                    cursor: pointer;
+
+                    @media all and (min-width: $breakpoint-desktop) {
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                    }
+
+                    img {
+                        margin-left: 4.5px;
+                        width: 11.5px;
+                        height: 10.2px;
+
+                        @media all and (min-width: $breakpoint-desktop) {
+                            width: 18.5px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .popup-text {
+        position: fixed;
+        bottom: -5px;
+        right:2.6%;
+        background-color: $color-secondary;
+        width: 376px;
+        height: 60px;
+        border-radius: 5px;
+        font-size: 24px;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        transition: 0.5s ease-in-out;
+
+        @media all and (max-width: $breakpoint-desktop) {
+            bottom:-60px;
+        }
+
+        .likes-total  {
+
+            img {
+                margin-left: 5px;
+                width: 18.5px;
+                height: 18px;
+            }    
+        }
+    }
+}
+

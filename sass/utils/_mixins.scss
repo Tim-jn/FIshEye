@@ -1,0 +1,5 @@
+@mixin display-hidden {
+    @media all and (min-width: $breakpoint-desktop) {
+        display: none;
+    } 
+}

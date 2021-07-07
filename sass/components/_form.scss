@@ -1,0 +1,127 @@
+.bground {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.4);
+
+    .content {
+        margin: auto;
+        max-width: 600px;
+        min-height: 745px;
+        background: $color-secondary;
+        border-radius: 5px;
+        position: relative;
+        box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+
+        @media all and (min-width: $breakpoint-desktop) {
+            padding-bottom: 40px;
+            margin: 1.5% auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 27px;
+            top: 20px;
+            cursor: pointer;
+
+            @media all and (min-width: $breakpoint-desktop) {
+                right: 40px;
+            }
+        }
+
+        .close:before, .close:after {
+            position: absolute;
+            content: " ";
+            height: 18.7px;
+            width: 2px;
+            background-color: #fff;
+
+            @media all and (min-width: $breakpoint-desktop) {
+                height: 42px;
+                width: 3px;
+            }
+        }
+
+        .close:before {
+            transform: rotate(45deg);
+        }
+
+        .close:after {
+            transform: rotate(-45deg);
+        }
+
+        .modal-body {
+            padding: 20px 4%;
+
+            .form-text {
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
+
+            label {
+                font-size: 24px;
+                display: inline-block;
+                margin: 11px 0 4px 0;
+            }
+
+              input {
+                padding: 8px;
+                border: 0.8px solid $color-tertiary-background;
+                outline: none;
+            }
+
+              .text-control {
+                padding: 8px;
+                width: 100%;
+                border-radius: 8px;
+                font-size: 15px;
+                height: 48px;
+            }
+
+            #message {
+                padding: 8px;
+                border-radius: 8px;
+                font-size: 15px;
+                min-width: 100%;
+                max-width: 100%;
+                min-height: 170px;
+                max-height: 184px;
+                border: 0.8px solid $color-tertiary-background;
+            }
+
+            @media all and (min-width: $breakpoint-desktop) {
+                .form-text {
+                    font-size: 54px;
+                }
+
+                label {
+                    font-size: 37px;
+                }
+            }
+        }
+
+        .btn-submit {
+            background: $color-primary;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            width: 170px;
+            height: 35px;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+
+            @media all and (min-width: $breakpoint-desktop) {
+                margin: 0 0 0 4%;
+                height: 59px;
+            }
+
+        }
+    }
+}
