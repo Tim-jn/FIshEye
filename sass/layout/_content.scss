@@ -4,7 +4,11 @@
     img {
         width: 150px;
         height: 37.5px;
-        margin-bottom: 42px;
+
+        @media all and (min-width: $breakpoint-desktop) {
+            width: 200px;
+            height: 50px;
+        }
     }
 }
 

@@ -1,1 +1,14 @@
+// filters buttons
 
+#medias-tags {
+    button {
+        @include filters-button;
+        cursor: pointer;
+    }
+}
+
+#tags-list {
+    #list-tags {
+        @include filters-button;
+    }
+}
