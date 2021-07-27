@@ -18,7 +18,7 @@ const TAGS = {
 const mediaTags = document.getElementById('medias-tags')
 Object.values(TAGS).forEach(tag => {
   const btn = document.createElement('button')
-  btn.innerHTML = '#' + tag
+  btn.textContent = '#' + tag
   btn.id = 'btn-tag-' + tag
   mediaTags.appendChild(btn)
   btn.addEventListener('click', filterPhotographers)
@@ -47,6 +47,7 @@ let data
 function photographerNodeFactory(photographer) {
     const photographerProfile = document.createElement('article')
     photographerProfile.id = 'photographer-' + photographer.id
+    const urlPhotographer = document.createElement('a')
     const profilePicture = document.createElement('img')
     const photographerName = document.createElement('h2')
     const localisation = document.createElement('p')
@@ -55,10 +56,12 @@ function photographerNodeFactory(photographer) {
     tagline.id = 'tagline'
     const price = document.createElement('p')
     price.id = 'price'
-    const tagsList = document.createElement('ul')
+    const tagsList = document.createElement('span')
     tagsList.id = 'tags-list'
 
+    urlPhotographer.href = './photographers/photographer' + photographer.id + '.html'
     profilePicture.src = './photographersID/' + photographer.portrait
+    profilePicture.alt = ''
     photographerName.textContent = photographer.name
     localisation.textContent = photographer.city + ', ' + photographer.country
     tagline.textContent = photographer.tagline
@@ -66,18 +69,19 @@ function photographerNodeFactory(photographer) {
 
     const tagList = photographer.tags;
     for (var j = 0; j < tagList.length; j++) {
-      const listTags = document.createElement('button');
-      listTags.id = 'list-tags';
-      listTags.textContent = '#' + tagList[j];
-      tagsList.appendChild(listTags);
+      const listTags = document.createElement('button')
+      listTags.id = 'list-tags'
+      listTags.textContent = '#' + tagList[j]
+      tagsList.appendChild(listTags)
     }
 
-    photographerProfile.appendChild(profilePicture);
-    photographerProfile.appendChild(photographerName)
-    photographerProfile.appendChild(localisation);
-    photographerProfile.appendChild(tagline);
-    photographerProfile.appendChild(price);
-    photographerProfile.appendChild(tagsList);
+    photographerProfile.appendChild(urlPhotographer)
+    urlPhotographer.appendChild(profilePicture)
+    urlPhotographer.appendChild(photographerName)
+    photographerProfile.appendChild(localisation)
+    photographerProfile.appendChild(tagline)
+    photographerProfile.appendChild(price)
+    photographerProfile.appendChild(tagsList)
 
     return photographerProfile
 }

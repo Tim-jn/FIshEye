@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css"/>
+    <title>FishEye - Photographes</title>
+</head>
+<body>
+    <input type="hidden" id="photographer-id" value="243" />
+    <header id="header" role="banner">
+        <a href ="../index.html">
+            <img src="../img/logo/logo.svg" aria-label="FishEye Home page" role="img">
+        </a>
+    </header>
+    <main id="main-photographer" role="main">
+        <section id="artist">
+        </section>
+        <section id="media-section">
+        </section>
+        <div class="popup-text" role="text">
+            <span class="likes-total"><span class="number">71</span><img src="../img/logo/heart.png" alt="likes"></span>
+            <span class="rates">300€ / jour</span>
+        </div>
+        <div id="form-modal" class="bground">
+            <div class="content">
+                <span class="close" onclick="closeFormModal()"></span>
+                <div class="modal-body">
+                    <form name="reserve" id="reserve" class="reserve" action="index.html" method="get">
+                <div class="form-text">
+                    Contactez-moi</br> 
+                    Mimi Keel
+                </div>
+                <div class="formData">
+                    <label for="first">Prénom</label><br />
+                    <input class="text-control" type="text" id="first" name="first" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="last">Nom</label><br />
+                    <input class="text-control" type="text" id="last" name="last" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="email">E-mail</label><br />
+                    <input class="text-control" type="email" id="email" name="email" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="message">Votre message</label><br />
+                    <textarea id="message" name="message" type ="text" rows="5" cols="33"></textarea>
+                </div>
+                </div>
+                  <input class="btn-submit" type="submit" value="Envoyer" />
+                </form>
+            </div>
+        </div>
+        </div>
+    </main> 
+    <script src="../js/photographer.js"></script>
+</body>
+</html>

@@ -31,6 +31,7 @@ body > * {
   font-weight: 600;
   background-color: #FFF;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .bground {
@@ -161,7 +162,7 @@ body > * {
   }
 }
 
-.artist {
+#artist {
   /*img {
       width: 100px;
       height: 100px;
@@ -170,7 +171,7 @@ body > * {
       box-shadow: $profile-picture-shadow;
   }*/
 }
-.artist .contact {
+#artist #contact {
   position: fixed;
   bottom: 25px;
   left: 50%;
@@ -185,7 +186,7 @@ body > * {
   cursor: pointer;
 }
 @media all and (min-width: 992px) {
-  .artist .contact {
+  #artist #contact {
     position: relative;
     width: 170px;
     height: 79px;
@@ -194,21 +195,63 @@ body > * {
   }
 }
 
-#main {
-  margin-top: unset;
+#main-photographer {
+  margin-top: 30px;
 }
-#main .galery {
+#main-photographer #artist {
+  position: relative;
+  margin-bottom: 46px;
+}
+@media all and (min-width: 992px) {
+  #main-photographer #artist {
+    background-color: #FAFAFA;
+  }
+}
+#main-photographer #artist img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  object-fit: cover;
+  border-radius: 100%;
+  height: 100px;
+  width: 100px;
+}
+#main-photographer #artist h2 {
+  color: #D3573C;
+  font-weight: 400;
+  font-size: 36px;
+  margin: 20px 0 0 0;
+}
+#main-photographer #artist #localisation {
+  color: #901C1C;
+  font-size: 13px;
+  margin: 0 0 4px 0;
+}
+#main-photographer #artist #tagline {
+  font-size: 13px;
+  margin: 0 0 2px 0;
+  color: #525252;
+}
+#main-photographer #artist #tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+}
+#main-photographer #artist #tags-list #list-tags {
+  margin: 5px 5px 0 0;
+}
+#main-photographer #media-section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 5%;
 }
-#main .galery .photo {
+#main-photographer #media-section article {
   display: flex;
   flex-direction: column;
 }
-#main .galery .photo .img {
+#main-photographer #media-section article #media-image {
   width: 100%;
   max-width: 350px;
   height: 0;
@@ -220,11 +263,17 @@ body > * {
   transition: 500ms ease;
 }
 @media all and (min-width: 992px) {
-  #main .galery .photo .img {
+  #main-photographer #media-section article #media-image {
     height: 100%;
   }
 }
-#main .galery .photo .text {
+#main-photographer #media-section article #media-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#main-photographer #media-section article #media-text h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -232,38 +281,46 @@ body > * {
   font-size: 0.9rem;
   color: #901C1C;
   margin: 10px 0 10px 0;
+  font-weight: 400;
 }
 @media all and (min-width: 992px) {
-  #main .galery .photo .text {
+  #main-photographer #media-section article #media-text h2 {
     font-size: 24px;
     margin: 10px 0 30px 0;
   }
 }
-#main .galery .photo .text .likes {
-  font-weight: 500;
+#main-photographer #media-section article #media-text span {
   cursor: pointer;
+  font-size: 0.9rem;
+  color: #901C1C;
+  font-weight: 600;
+  margin: 10px 0 10px 0;
 }
 @media all and (min-width: 992px) {
-  #main .galery .photo .text .likes:hover {
+  #main-photographer #media-section article #media-text span {
+    font-size: 24px;
+    margin: 10px 0 30px 0;
+  }
+  #main-photographer #media-section article #media-text span:hover {
     transform: scale(1.1);
   }
 }
-#main .galery .photo .text .likes img {
+#main-photographer #media-section article #media-text span img {
   margin-left: 4.5px;
   width: 11.5px;
   height: 10.2px;
 }
 @media all and (min-width: 992px) {
-  #main .galery .photo .text .likes img {
+  #main-photographer #media-section article #media-text span img {
     width: 18.5px;
-    height: 18px;
+    height: 17px;
   }
 }
-#main .popup-text {
+#main-photographer .popup-text {
   position: fixed;
   bottom: -5px;
   right: 2.6%;
-  background-color: #D3573C;
+  background-color: #DB8876;
   width: 376px;
   height: 60px;
   border-radius: 5px;
@@ -275,11 +332,11 @@ body > * {
   transition: 0.5s ease-in-out;
 }
 @media all and (max-width: 992px) {
-  #main .popup-text {
+  #main-photographer .popup-text {
     bottom: -60px;
   }
 }
-#main .popup-text .likes-total img {
+#main-photographer .popup-text .likes-total img {
   margin-left: 5px;
   width: 18.5px;
   height: 18px;
@@ -331,7 +388,7 @@ header .text {
 @media all and (min-width: 992px) {
   #main-index {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 301px);
     max-width: 100%;
     justify-content: space-between;
     margin-top: 100px;
@@ -340,10 +397,9 @@ header .text {
 #main-index article {
   text-align: center;
 }
-@media all and (min-width: 992px) {
-  #main-index article {
-    min-width: 270px;
-  }
+#main-index article a {
+  cursor: pointer;
+  text-decoration: none;
 }
 #main-index article h2 {
   color: #D3573C;
@@ -367,15 +423,12 @@ header .text {
 }
 #main-index article #tags-list {
   display: flex;
-  list-style: none;
   justify-content: center;
   margin: 0 0 42px 0;
   gap: 5px;
   padding: 0;
 }
 #main-index img {
-  height: 20%;
-  width: 20%;
   object-fit: cover;
   border-radius: 100%;
   height: 200px;
