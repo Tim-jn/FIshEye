@@ -21,6 +21,9 @@ body > * {
   background-color: #FFF;
   font-size: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #tags-list #list-tags {
@@ -32,6 +35,9 @@ body > * {
   background-color: #FFF;
   font-size: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bground {
@@ -187,11 +193,13 @@ body > * {
 }
 @media all and (min-width: 992px) {
   #artist #contact {
-    position: relative;
+    position: absolute;
     width: 170px;
-    height: 79px;
+    height: 69px;
     font-size: 20px;
     padding: 0;
+    bottom: 57%;
+    left: 50%;
   }
 }
 
@@ -202,19 +210,28 @@ body > * {
   position: relative;
   margin-bottom: 46px;
 }
-@media all and (min-width: 992px) {
+@media all and (min-width: 576px) {
   #main-photographer #artist {
     background-color: #FAFAFA;
+    padding: 50px;
   }
 }
 #main-photographer #artist img {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 4%;
+  top: auto;
   object-fit: cover;
   border-radius: 100%;
   height: 100px;
   width: 100px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+}
+@media all and (min-width: 992px) {
+  #main-photographer #artist img {
+    height: 200px;
+    width: 200px;
+    right: 4%;
+  }
 }
 #main-photographer #artist h2 {
   color: #D3573C;
@@ -222,38 +239,77 @@ body > * {
   font-size: 36px;
   margin: 20px 0 0 0;
 }
+@media all and (min-width: 992px) {
+  #main-photographer #artist h2 {
+    font-size: 64px;
+    margin: 0;
+  }
+}
 #main-photographer #artist #localisation {
   color: #901C1C;
   font-size: 13px;
   margin: 0 0 4px 0;
+}
+@media all and (min-width: 992px) {
+  #main-photographer #artist #localisation {
+    font-size: 24px;
+    margin: 0 0 19px 0;
+  }
 }
 #main-photographer #artist #tagline {
   font-size: 13px;
   margin: 0 0 2px 0;
   color: #525252;
 }
+@media all and (min-width: 992px) {
+  #main-photographer #artist #tagline {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+  }
+}
 #main-photographer #artist #tags-list {
   display: flex;
   flex-wrap: wrap;
-  width: 250px;
+  max-width: 250px;
+}
+@media all and (min-width: 992px) {
+  #main-photographer #artist #tags-list {
+    max-width: 500px;
+  }
 }
 #main-photographer #artist #tags-list #list-tags {
   margin: 5px 5px 0 0;
+}
+@media all and (min-width: 992px) {
+  #main-photographer #artist #tags-list #list-tags {
+    font-size: 18px;
+    height: 24px;
+    width: 99px;
+    font-weight: 500;
+  }
 }
 #main-photographer #media-section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 5%;
+  justify-content: space-between;
+  gap: 2%;
+}
+@media all and (max-width: 1215px) {
+  #main-photographer #media-section {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+  }
 }
 #main-photographer #media-section article {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 350px;
 }
 #main-photographer #media-section article #media-image {
   width: 100%;
-  max-width: 350px;
   height: 0;
   min-height: 190px;
   max-height: 300px;
@@ -293,7 +349,7 @@ body > * {
   cursor: pointer;
   font-size: 0.9rem;
   color: #901C1C;
-  font-weight: 600;
+  font-weight: 500;
   margin: 10px 0 10px 0;
 }
 @media all and (min-width: 992px) {
@@ -319,13 +375,12 @@ body > * {
 #main-photographer .popup-text {
   position: fixed;
   bottom: -5px;
-  right: 2.6%;
+  right: 2%;
   background-color: #DB8876;
   width: 376px;
   height: 60px;
   border-radius: 5px;
   font-size: 24px;
-  font-weight: 500;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -433,6 +488,7 @@ header .text {
   border-radius: 100%;
   height: 200px;
   width: 200px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /*# sourceMappingURL=style.css.map */

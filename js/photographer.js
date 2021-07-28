@@ -1,3 +1,9 @@
+//
+
+    /* Photographer's gallery */
+
+//
+
 function appendMediaToGallery(photographer, media, gallery) {
     const mediaElement = document.createElement('article')
     const mediaImg = document.createElement('img')
@@ -30,6 +36,11 @@ fetch('../data/FishEyeData.json')
     photographerMedias.forEach(media => appendMediaToGallery(photographer, media, gallery))
   });
 
+//
+
+    /* Photographer's header */
+
+//
 
 function photographerHeader(photographer) {
     const photographerProfile = document.createElement('article')
@@ -41,7 +52,7 @@ function photographerHeader(photographer) {
     localisation.id = 'localisation'
     const tagline = document.createElement('p')
     tagline.id = 'tagline'
-    const tagsList = document.createElement('span')
+    const tagsList = document.createElement('nav')
     tagsList.id = 'tags-list'
 
     profilePicture.src = '../photographersID/' + photographer.portrait
@@ -80,58 +91,13 @@ fetch('../data/FishEyeData.json')
       photographerMedias.forEach(photographer => content.appendChild(photographerHeader(photographer)))
 });
 
-  /*function photographerNodeFactory(photographer) {
-    const photographerProfile = document.createElement('article')
-    photographerProfile.id = 'photographer-' + photographer.id
-    const urlPhotographer = document.createElement('a')
-    const profilePicture = document.createElement('img')
-    const photographerName = document.createElement('h2')
-    const localisation = document.createElement('p')
-    localisation.id = 'localisation'
-    const tagline = document.createElement('p')
-    tagline.id = 'tagline'
-    const price = document.createElement('p')
-    price.id = 'price'
-    const tagsList = document.createElement('span')
-    tagsList.id = 'tags-list'
+//
 
-    urlPhotographer.href = './photographers/photographer' + photographer.id + '.html'
-    profilePicture.src = './photographersID/' + photographer.portrait
-    profilePicture.alt = ''
-    photographerName.textContent = photographer.name
-    localisation.textContent = photographer.city + ', ' + photographer.country
-    tagline.textContent = photographer.tagline
-    price.textContent = photographer.price + '€/jour'
+    /* tag filter */
 
-    const tagList = photographer.tags;
-    for (var j = 0; j < tagList.length; j++) {
-      const listTags = document.createElement('button')
-      listTags.id = 'list-tags'
-      listTags.textContent = '#' + tagList[j]
-      tagsList.appendChild(listTags)
-    }
+//
 
-    photographerProfile.appendChild(urlPhotographer)
-    urlPhotographer.appendChild(profilePicture)
-    urlPhotographer.appendChild(photographerName)
-    photographerProfile.appendChild(localisation)
-    photographerProfile.appendChild(tagline)
-    photographerProfile.appendChild(price)
-    photographerProfile.appendChild(tagsList)
 
-    return photographerProfile
-}
-
-fetch('../data/FishEyeData.json')
-  .then((response) => response.json())
-  .then((_data) => {
-    data = _data
-      const content = document.getElementById('header')
-      data.photographers.forEach(photographer => 
-        content.appendChild(photographerNodeFactory(photographer)))
-  });
-
-let data*/
 
 // 
 
@@ -139,17 +105,17 @@ let data*/
 
 //
 
-function count() {
-  let clickNumber = document.querySelector("#main span.likes span.number").innerText;
-  let likesTotal = document.querySelector("#main span.likes-total span.number").innerText;
+/*function count() {
+  let clickNumber = document.querySelector("#main-photographer span").textContent;
+  let likesTotal = document.querySelector("#main span.likes-total span.number").textContent;
   clickNumber++;
 
   likesTotal++;
-  document.querySelector("#main span.likes span.number").innerText = clickNumber;
-  document.querySelector("#main span.likes-total span.number").innerText = likesTotal;  
+  document.querySelector("#main-photographer span").textContent = clickNumber;
+  document.querySelector("#main span.likes-total span.number").textContent = likesTotal;  
 }
 
-document.querySelector("#main span.likes").addEventListener("click", count);
+document.querySelector("#main-photographer span").addEventListener("click", count);*/
 
 // 
 
@@ -159,7 +125,7 @@ document.querySelector("#main span.likes").addEventListener("click", count);
 
 // launch,close modal DOM elements
 const formModalBg = document.querySelector("#form-modal.bground");
-const formModalBtn = document.querySelectorAll("#main button.contact");
+const formModalBtn = document.querySelectorAll("#main-photographer button#contact");
 
 // launch modal event
 formModalBtn.forEach((btn) => btn.addEventListener("click", launchFormModal));
