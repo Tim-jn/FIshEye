@@ -8,11 +8,13 @@ function appendMediaToGallery(photographer, media, gallery) {
     const mediaElement = document.createElement('article')
     const mediaImg = document.createElement('img')
     mediaImg.id = 'media-image'
+    mediaImg.alt = media.alt
     const mediaText = document.createElement('div')
     mediaText.id = 'media-text'
     const mediaName = document.createElement('h2')
     const mediaLikes = document.createElement('span')
     const mediaHeart = document.createElement('img')
+    mediaHeart.alt = 'likes'
     mediaName.textContent = media.title
     mediaLikes.textContent = media.likes
     mediaImg.src = '../img/photos/' + photographer.name + '/' + media.image
@@ -85,7 +87,6 @@ fetch('../data/FishEyeData.json')
   .then((data) => {
         const { photographers } = data
         const photographerId = parseInt(document.getElementById("photographer-id").value)
-        const photographer = photographers.find((photographer) => photographer.id === photographerId)
         const photographerMedias = photographers.filter((item) => item.id === photographerId)
       const content = document.getElementById('artist')
       photographerMedias.forEach(photographer => content.appendChild(photographerHeader(photographer)))

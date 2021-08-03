@@ -40,6 +40,36 @@ body > * {
   justify-content: center;
 }
 
+#artist #contact {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #901C1C;
+  color: #fff;
+  padding: 5px 18px 7px 18px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+#artist #contact:hover, #artist #contact:focus {
+  background-color: #DB8876;
+  color: #000;
+}
+@media all and (min-width: 992px) {
+  #artist #contact {
+    position: absolute;
+    width: 170px;
+    height: 69px;
+    font-size: 20px;
+    padding: 0;
+    bottom: 57%;
+    left: 50%;
+  }
+}
+
 .bground {
   display: none;
   position: fixed;
@@ -168,47 +198,11 @@ body > * {
   }
 }
 
-#artist {
-  /*img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 100%;
-      box-shadow: $profile-picture-shadow;
-  }*/
-}
-#artist #contact {
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #901C1C;
-  color: #FFF;
-  padding: 5px 18px 7px 18px;
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-@media all and (min-width: 992px) {
-  #artist #contact {
-    position: absolute;
-    width: 170px;
-    height: 69px;
-    font-size: 20px;
-    padding: 0;
-    bottom: 57%;
-    left: 50%;
-  }
-}
-
 #main-photographer {
   margin-top: 30px;
 }
 #main-photographer #artist {
   position: relative;
-  margin-bottom: 46px;
 }
 @media all and (min-width: 576px) {
   #main-photographer #artist {
@@ -287,6 +281,23 @@ body > * {
     width: 99px;
     font-weight: 500;
   }
+}
+#main-photographer #sort-list {
+  font-weight: 700;
+  font-size: 18px;
+}
+#main-photographer #sort-list #sort-by {
+  background-color: #901C1C;
+  color: #fff;
+  border: none;
+  height: 60px;
+  width: 170px;
+  border-radius: 5px;
+  margin: 9px 0 48px 25px;
+  font-size: 18px;
+}
+#main-photographer #sort-list #sort-by > * {
+  font-size: 18px;
 }
 #main-photographer #media-section {
   display: flex;
@@ -376,7 +387,7 @@ body > * {
   position: fixed;
   bottom: -5px;
   right: 2%;
-  background-color: #DB8876;
+  background-color: #db8876;
   width: 376px;
   height: 60px;
   border-radius: 5px;
