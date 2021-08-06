@@ -7,7 +7,7 @@
 }
 
 #tags-list {
-  #list-tags {
+  button {
     @include filters-button;
   }
 }
