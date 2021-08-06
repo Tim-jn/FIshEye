@@ -36,10 +36,9 @@
             <div class="content">
                 <span class="close"></span>
                 <div class="modal-body">
-                    <form name="reserve" id="reserve" class="reserve" action="index.html" method="get">
+                    <form name="reserve" id="reserve" class="reserve" action="" method="get">
                 <div class="form-text">
-                    Contactez-moi</br> 
-                    Mimi Keel
+                    <span>Contactez-moi</span></br>
                 </div>
                 <div class="formData">
                     <label for="first">Prénom</label><br />
@@ -55,13 +54,15 @@
                 </div>
                 <div class="formData">
                     <label for="message">Votre message</label><br />
-                    <textarea id="message" name="message" type ="text" rows="5" cols="33"></textarea>
+                    <textarea class="text-control message" type="text" id="message" name="message" rows="10" cols="50" required></textarea>
                 </div>
                 </div>
                   <input class="btn-submit" type="submit" value="Envoyer" />
                 </form>
             </div>
         </div>
+        <div id="lightbox-modal" class="lightbox">
+            <span class="close-btn"></span>
         </div>
     </main> 
     <script type="module" src="../js/photographer.js"></script>

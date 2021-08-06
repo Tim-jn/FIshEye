@@ -1,9 +1,9 @@
 /////////////////// init content ///////////////////
 
-import {getPhotographers} from './api.js'
+import { getPhotographersIndex } from "./api.js";
 
 async function init() {
-  let photographers = await getPhotographers();
+  let photographers = await getPhotographersIndex();
   const content = document.getElementById("main-index");
   photographers.forEach((photographer) =>
     content.appendChild(photographerNodeFactory(photographer, photographers))

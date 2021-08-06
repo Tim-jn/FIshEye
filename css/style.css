@@ -82,11 +82,12 @@ body > * {
 }
 .bground .content {
   margin: auto;
-  max-width: 600px;
-  min-height: 745px;
-  background: #D3573C;
-  border-radius: 5px;
   position: relative;
+  max-width: 600px;
+  width: 100%;
+  min-height: 812px;
+  background: #DB8876;
+  border-radius: 5px;
   box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
 }
 @media all and (min-width: 992px) {
@@ -97,26 +98,22 @@ body > * {
 }
 .bground .content .close {
   position: absolute;
-  right: 27px;
-  top: 20px;
+  right: 33px;
+  top: 26px;
   cursor: pointer;
 }
-@media all and (min-width: 992px) {
-  .bground .content .close {
-    right: 40px;
-  }
-}
-.bground .content .close:before, .bground .content .close:after {
+.bground .content .close:before,
+.bground .content .close:after {
   position: absolute;
   content: " ";
-  height: 18.7px;
-  width: 2px;
+  height: 22px;
+  width: 3px;
   background-color: #fff;
 }
 @media all and (min-width: 992px) {
-  .bground .content .close:before, .bground .content .close:after {
+  .bground .content .close:before,
+.bground .content .close:after {
     height: 42px;
-    width: 3px;
   }
 }
 .bground .content .close:before {
@@ -125,47 +122,42 @@ body > * {
 .bground .content .close:after {
   transform: rotate(-45deg);
 }
-.bground .content .modal-body {
-  padding: 20px 4%;
+.bground .content .modal-body #reserve {
+  padding: 20px 22px 12px 15px;
 }
-.bground .content .modal-body .form-text {
+.bground .content .modal-body #reserve .form-text {
   font-size: 36px;
-  margin-bottom: 10px;
-}
-.bground .content .modal-body label {
-  font-size: 24px;
-  display: inline-block;
-  margin: 11px 0 4px 0;
-}
-.bground .content .modal-body input {
-  padding: 8px;
-  border: 0.8px solid #FAFAFA;
-  outline: none;
-}
-.bground .content .modal-body .text-control {
-  padding: 8px;
-  width: 100%;
-  border-radius: 8px;
-  font-size: 15px;
-  height: 48px;
-}
-.bground .content .modal-body #message {
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 15px;
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 170px;
-  max-height: 184px;
-  border: 0.8px solid #FAFAFA;
+  margin-bottom: 15px;
 }
 @media all and (min-width: 992px) {
-  .bground .content .modal-body .form-text {
-    font-size: 54px;
+  .bground .content .modal-body #reserve .form-text {
+    font-size: 55px;
   }
-  .bground .content .modal-body label {
-    font-size: 37px;
+}
+.bground .content .modal-body #reserve .formData {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 14px;
+}
+.bground .content .modal-body #reserve .formData label {
+  font-size: 24px;
+}
+@media all and (min-width: 992px) {
+  .bground .content .modal-body #reserve .formData label {
+    font-size: 30px;
   }
+}
+.bground .content .modal-body #reserve .formData .text-control {
+  margin-top: 5px;
+  height: 52px;
+  max-width: 100%;
+  min-width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.bground .content .modal-body #reserve .formData .message {
+  height: 184px;
 }
 .bground .content .btn-submit {
   background: #901C1C;

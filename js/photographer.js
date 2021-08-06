@@ -1,42 +1,25 @@
 /////////////////// init content ///////////////////
 
+import { getPhotographers } from "./api.js";
+import { getMedias } from "./api.js";
 
+async function init() {
+  let photographers = await getPhotographers();
+  const photographerId = parseInt(document.getElementById("photographer-id").value);
+  const photographerItem = photographers.filter((item) => item.id === photographerId);
+  const content = document.getElementById("artist");
+  photographerItem.forEach((photographer) => content.appendChild(photographerHeader(photographer)));
 
-/////////////////// create photographers gallery ///////////////////
+  let medias = await getMedias();
+  const photographer = photographers.find((photographer) => photographer.id === photographerId);
+  const photographerMedias = medias.filter((item) => item.photographerId === photographerId);
+  const gallery = document.getElementById("media-section");
+  photographerMedias.forEach((media) => appendMediaToGallery(photographer, media, gallery));
 
-function appendMediaToGallery(photographer, media, gallery) {
-  const mediaElement = document.createElement("article");
-  const mediaImg = document.createElement("img");
-  mediaImg.id = "media-image";
-  mediaImg.alt = media.alt;
-  const mediaText = document.createElement("div");
-  mediaText.id = "media-text";
-  const mediaName = document.createElement("h2");
-  const mediaLikes = document.createElement("span");
-  const mediaHeart = document.createElement("img");
-  mediaHeart.alt = "likes";
-  mediaName.textContent = media.title;
-  mediaLikes.textContent = media.likes;
-  mediaImg.src = "../img/photos/" + photographer.name + "/" + media.image;
-  mediaHeart.src = "../img/logo/heart.png";
-  mediaElement.appendChild(mediaImg);
-  mediaElement.appendChild(mediaText);
-  mediaText.appendChild(mediaName);
-  mediaText.appendChild(mediaLikes);
-  mediaLikes.appendChild(mediaHeart);
-  gallery.appendChild(mediaElement);
+  formModal(photographer);
 }
 
-fetch("../data/FishEyeData.json")
-  .then((response) => response.json())
-  .then((data) => {
-    const { photographers, media } = data;
-    const photographerId = parseInt(document.getElementById("photographer-id").value);
-    const photographer = photographers.find((photographer) => photographer.id === photographerId);
-    const photographerMedias = media.filter((item) => item.photographerId === photographerId);
-    const gallery = document.getElementById("media-section");
-    photographerMedias.forEach((media) => appendMediaToGallery(photographer, media, gallery));
-  });
+init();
 
 /////////////////// create photographers header ///////////////////
 
@@ -77,17 +60,32 @@ function photographerHeader(photographer) {
   return photographerProfile;
 }
 
-fetch("../data/FishEyeData.json")
-  .then((response) => response.json())
-  .then((data) => {
-    const { photographers } = data;
-    const photographerId = parseInt(document.getElementById("photographer-id").value);
-    const photographerMedias = photographers.filter((item) => item.id === photographerId);
-    const content = document.getElementById("artist");
-    photographerMedias.forEach((photographer) =>
-      content.appendChild(photographerHeader(photographer))
-    );
-  });
+/////////////////// create photographers gallery ///////////////////
+
+function appendMediaToGallery(photographer, media, gallery) {
+  const mediaElement = document.createElement("article");
+  const mediaImg = document.createElement("img");
+  mediaImg.id = "media-image";
+  mediaImg.alt = media.alt;
+  const mediaText = document.createElement("div");
+  mediaText.id = "media-text";
+  const mediaName = document.createElement("h2");
+  const mediaLikes = document.createElement("span");
+  const mediaHeart = document.createElement("img");
+  mediaHeart.alt = "likes";
+  mediaName.textContent = media.title;
+  mediaLikes.textContent = media.likes;
+  mediaImg.src = "../img/photos/" + photographer.name + "/" + media.image;
+  mediaHeart.src = "../img/logo/heart.png";
+  mediaElement.appendChild(mediaImg);
+  mediaElement.appendChild(mediaText);
+  mediaText.appendChild(mediaName);
+  mediaText.appendChild(mediaLikes);
+  mediaLikes.appendChild(mediaHeart);
+  gallery.appendChild(mediaElement);
+
+  lightbox(photographer, medias);
+}
 
 /////////////////// tag filter ///////////////////
 
@@ -107,24 +105,53 @@ document.querySelector("#main-photographer span").addEventListener("click", coun
 
 /////////////////// form modal ///////////////////
 
-function formModal() {
+function formModal(photographer) {
+  const photographerNameContent = document.querySelector("#form-modal div.form-text");
+  const photographerName = document.createElement("span");
+  photographerName.textContent = photographer.name;
+  photographerNameContent.appendChild(photographerName);
+
   const formModalBg = document.querySelector("#form-modal.bground");
   const closeFormBtn = document.querySelectorAll("#form-modal span.close");
   const formModalBtn = document.querySelectorAll("#main-photographer #contact");
 
-  formModalBtn.forEach((btn) => btn.addEventListener("click", launchFormModal));
+  formModalBtn.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      formModalBg.style.display = "block";
+      document.body.style.overflow = "hidden";
+    })
+  );
 
-  function launchFormModal() {
-    formModalBg.style.display = "block";
-    document.body.style.overflow = "hidden";
-  }
-
-  closeFormBtn.forEach((btn) => btn.addEventListener("click", closeFormModal));
-
-  function closeFormModal() {
-    formModalBg.style.display = "none";
-    document.body.style.overflow = "auto";
-  }
+  closeFormBtn.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      formModalBg.style.display = "none";
+      document.body.style.overflow = "auto";
+    })
+  );
 }
 
-formModal();
+/////////////////// lightbox modal ///////////////////
+
+/*function lightbox (photographer, medias) {
+  const photographerNameContent = document.querySelector("#form-modal div.form-text");
+  const photographerName = document.createElement("span");
+  photographerName.textContent = photographer.name;
+  photographerNameContent.appendChild(photographerName);
+
+  const lightboxModal = document.querySelector("#lightbox-modal");
+  const closeLightboxBtn = document.querySelectorAll("#lightbox-modal span.close-btn");
+
+  lightboxModal.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      lightboxModal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    })
+  );
+
+  closeLightboxBtn.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      lightboxModal.style.display = "none";
+      document.body.style.overflow = "auto";
+    })
+  );
+}*/
