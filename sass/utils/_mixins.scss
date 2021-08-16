@@ -22,4 +22,15 @@
     justify-content: center;
 }
 
+// lightbox
 
+@mixin lightbox-buttons {
+    width: 12px;
+    border: none;
+    position: fixed;
+    cursor: pointer;
+    text-indent: 3000px;
+    &:hover {
+      transform: scale(1.1);
+    }
+}

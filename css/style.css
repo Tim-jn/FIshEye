@@ -53,6 +53,7 @@ body > * {
   font-weight: bold;
   border: none;
   cursor: pointer;
+  z-index: 2;
 }
 #artist #contact:hover, #artist #contact:focus {
   background-color: #DB8876;
@@ -67,115 +68,6 @@ body > * {
     padding: 0;
     bottom: 57%;
     left: 50%;
-  }
-}
-
-.bground {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: rgba(196, 196, 196, 0.4);
-}
-.bground .content {
-  margin: auto;
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  min-height: 812px;
-  background: #DB8876;
-  border-radius: 5px;
-  box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
-}
-@media all and (min-width: 992px) {
-  .bground .content {
-    padding-bottom: 40px;
-    margin: 1.5% auto;
-  }
-}
-.bground .content .close {
-  position: absolute;
-  right: 33px;
-  top: 26px;
-  cursor: pointer;
-}
-.bground .content .close:before,
-.bground .content .close:after {
-  position: absolute;
-  content: " ";
-  height: 22px;
-  width: 3px;
-  background-color: #fff;
-}
-@media all and (min-width: 992px) {
-  .bground .content .close:before,
-.bground .content .close:after {
-    height: 42px;
-  }
-}
-.bground .content .close:before {
-  transform: rotate(45deg);
-}
-.bground .content .close:after {
-  transform: rotate(-45deg);
-}
-.bground .content .modal-body #reserve {
-  padding: 20px 22px 12px 15px;
-}
-.bground .content .modal-body #reserve .form-text {
-  font-size: 36px;
-  margin-bottom: 15px;
-}
-@media all and (min-width: 992px) {
-  .bground .content .modal-body #reserve .form-text {
-    font-size: 55px;
-  }
-}
-.bground .content .modal-body #reserve .formData {
-  max-width: 100%;
-  width: 100%;
-  margin-bottom: 14px;
-}
-.bground .content .modal-body #reserve .formData label {
-  font-size: 24px;
-}
-@media all and (min-width: 992px) {
-  .bground .content .modal-body #reserve .formData label {
-    font-size: 30px;
-  }
-}
-.bground .content .modal-body #reserve .formData .text-control {
-  margin-top: 5px;
-  height: 52px;
-  max-width: 100%;
-  min-width: 100%;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-}
-.bground .content .modal-body #reserve .formData .message {
-  height: 184px;
-}
-.bground .content .btn-submit {
-  background: #901C1C;
-  display: block;
-  margin: 0 auto;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 18px;
-  width: 170px;
-  height: 35px;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-}
-@media all and (min-width: 992px) {
-  .bground .content .btn-submit {
-    margin: 0 0 0 4%;
-    height: 59px;
   }
 }
 
@@ -310,11 +202,13 @@ body > * {
   flex-direction: column;
   width: 100%;
   max-width: 350px;
+  text-decoration: none;
 }
-#main-photographer #media-section article #media-image {
+#main-photographer #media-section article #media-image,
+#main-photographer #media-section article #media-video {
+  cursor: pointer;
   width: 100%;
-  height: 0;
-  min-height: 190px;
+  height: 190px;
   max-height: 300px;
   object-fit: cover;
   object-position: 50% 30%;
@@ -322,8 +216,9 @@ body > * {
   transition: 500ms ease;
 }
 @media all and (min-width: 992px) {
-  #main-photographer #media-section article #media-image {
-    height: 100%;
+  #main-photographer #media-section article #media-image,
+#main-photographer #media-section article #media-video {
+    height: 300px;
   }
 }
 #main-photographer #media-section article #media-text {
@@ -331,16 +226,16 @@ body > * {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  white-space: nowrap;
 }
 #main-photographer #media-section article #media-text h2 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  max-width: 270px;
   font-size: 0.9rem;
   color: #901C1C;
   margin: 10px 0 10px 0;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media all and (min-width: 992px) {
   #main-photographer #media-section article #media-text h2 {
@@ -348,29 +243,34 @@ body > * {
     margin: 10px 0 30px 0;
   }
 }
-#main-photographer #media-section article #media-text span {
+#main-photographer #media-section article #media-text button {
   cursor: pointer;
   font-size: 0.9rem;
   color: #901C1C;
   font-weight: 500;
   margin: 10px 0 10px 0;
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+#main-photographer #media-section article #media-text button p {
+  margin: 0;
 }
 @media all and (min-width: 992px) {
-  #main-photographer #media-section article #media-text span {
+  #main-photographer #media-section article #media-text button {
     font-size: 24px;
     margin: 10px 0 30px 0;
   }
-  #main-photographer #media-section article #media-text span:hover {
-    transform: scale(1.1);
-  }
 }
-#main-photographer #media-section article #media-text span img {
+#main-photographer #media-section article #media-text button img {
   margin-left: 4.5px;
   width: 11.5px;
   height: 10.2px;
 }
 @media all and (min-width: 992px) {
-  #main-photographer #media-section article #media-text span img {
+  #main-photographer #media-section article #media-text button img {
     width: 18.5px;
     height: 17px;
   }
@@ -397,7 +297,213 @@ body > * {
 #main-photographer .popup-text .likes-total img {
   margin-left: 5px;
   width: 18.5px;
-  height: 18px;
+  height: 17px;
+}
+
+.bground {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(196, 196, 196, 0.4);
+  z-index: 11;
+}
+.bground .content {
+  margin: auto;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  min-height: 812px;
+  background: #DB8876;
+  border-radius: 5px;
+  box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+}
+@media all and (min-width: 992px) {
+  .bground .content {
+    padding-bottom: 40px;
+    margin: 1.5% auto;
+  }
+}
+.bground .content .close {
+  background: url(../img/logo/close-modal.png) center center/100% 100%;
+  position: absolute;
+  right: 26px;
+  top: 26px;
+  cursor: pointer;
+  height: 19px;
+  width: 19px;
+  border: none;
+}
+@media all and (min-width: 992px) {
+  .bground .content .close {
+    height: 35px;
+    width: 35px;
+  }
+}
+.bground .content .modal-body #reserve {
+  padding: 20px 22px 12px 15px;
+}
+.bground .content .modal-body #reserve .form-text {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+@media all and (min-width: 992px) {
+  .bground .content .modal-body #reserve .form-text {
+    font-size: 55px;
+  }
+}
+.bground .content .modal-body #reserve .formData {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 14px;
+}
+.bground .content .modal-body #reserve .formData label {
+  font-size: 24px;
+}
+@media all and (min-width: 992px) {
+  .bground .content .modal-body #reserve .formData label {
+    font-size: 30px;
+  }
+}
+.bground .content .modal-body #reserve .formData .text-control {
+  margin-top: 5px;
+  height: 52px;
+  max-width: 100%;
+  min-width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.bground .content .modal-body #reserve .formData .message {
+  height: 184px;
+}
+.bground .content .btn-submit {
+  background: #901C1C;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  width: 170px;
+  height: 35px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+@media all and (min-width: 992px) {
+  .bground .content .btn-submit {
+    margin: 0 0 0 4%;
+    height: 59px;
+  }
+}
+
+.lightbox.fadeOut {
+  opacity: 0;
+}
+
+.lightbox {
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transition: opacity 0.3s;
+  z-index: 11;
+}
+.lightbox .lightbox-container {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  min-height: 100vh;
+  max-width: 1050px;
+}
+.lightbox .lightbox-container img,
+.lightbox .lightbox-container video {
+  width: 289px;
+  max-width: 100%;
+  height: 248px;
+  object-fit: cover;
+  object-position: 50% 30%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+@media all and (min-width: 992px) {
+  .lightbox .lightbox-container img,
+.lightbox .lightbox-container video {
+    width: 1050px;
+    height: 900px;
+  }
+}
+.lightbox .next {
+  background: url(../img/logo/right.png) center center/100% 100%;
+  width: 12px;
+  border: none;
+  position: fixed;
+  cursor: pointer;
+  text-indent: 3000px;
+  top: 50%;
+  right: 25px;
+  height: 16px;
+}
+.lightbox .next:hover {
+  transform: scale(1.1);
+}
+@media all and (min-width: 992px) {
+  .lightbox .next {
+    height: 48px;
+    width: 30px;
+    right: 350px;
+  }
+}
+.lightbox .prev {
+  background: url(../img/logo/left.png) center center/100% 100%;
+  width: 12px;
+  border: none;
+  position: fixed;
+  cursor: pointer;
+  text-indent: 3000px;
+  left: 25px;
+  top: 50%;
+  height: 16px;
+}
+.lightbox .prev:hover {
+  transform: scale(1.1);
+}
+@media all and (min-width: 992px) {
+  .lightbox .prev {
+    height: 48px;
+    width: 30px;
+    left: 350px;
+  }
+}
+.lightbox .close {
+  background: url(../img/logo/close.png) center center/100% 100%;
+  width: 12px;
+  border: none;
+  position: fixed;
+  cursor: pointer;
+  text-indent: 3000px;
+  height: 12px;
+  top: 36.5%;
+  right: 25px;
+}
+.lightbox .close:hover {
+  transform: scale(1.1);
+}
+@media all and (min-width: 992px) {
+  .lightbox .close {
+    height: 42px;
+    width: 42px;
+    right: 350px;
+    top: 40px;
+  }
 }
 
 header {

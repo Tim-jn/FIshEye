@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="#">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,12 +22,13 @@
         <label for="sort-by" role="list" id="sort-list">
             Trier par
             <select name="sort" id="sort-by">
-                <option value="popularity" role="listitem">Popularité</option>
-                <option value="date" role="listitem">Date</option>
-                <option value="title" role="listitem">Titre</option>
+                <option id="option1" value="popularity" role="listitem">Popularité</option>
+                <option id="option2" value="date" role="listitem">Date</option>
+                <option id="option3" value="title" role="listitem">Titre</option>
             </select>
         </label>
         <section id="media-section">
+            <video id="media-video" controls type="video/mp4"></video>
         </section>
         <div class="popup-text" role="text">
             <span class="likes-total"><span class="number">71</span><img src="../img/logo/blackheart.png" alt="likes"></span>
@@ -34,7 +36,7 @@
         </div>
         <div id="form-modal" class="bground">
             <div class="content">
-                <span class="close"></span>
+                <button class="close"></button>
                 <div class="modal-body">
                     <form name="reserve" id="reserve" class="reserve" action="" method="get">
                 <div class="form-text">
@@ -60,9 +62,6 @@
                   <input class="btn-submit" type="submit" value="Envoyer" />
                 </form>
             </div>
-        </div>
-        <div id="lightbox-modal" class="lightbox">
-            <span class="close-btn"></span>
         </div>
     </main> 
     <script type="module" src="../js/photographer.js"></script>
