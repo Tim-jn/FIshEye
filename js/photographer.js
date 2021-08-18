@@ -14,11 +14,12 @@ async function init() {
   let medias = await getMedias();
   const photographer = photographers.find((photographer) => photographer.id === photographerId);
   const photographerMedias = medias.filter((item) => item.photographerId === photographerId);
-  const gallery = document.getElementById("media-section");
-  photographerMedias.forEach((media) => appendMediaToGallery(photographer, media, gallery));
+  photographerMedias.forEach((media) => appendMediaToGallery(photographer, media));
 
   formModal(photographer);
-  lightbox.init(photographer, photographerMedias);
+  lightbox.init();
+  document.querySelector("#sort-by").addEventListener("change", () => sortBy(photographerMedias));
+  incrementLikes(photographerMedias);
 }
 
 init();
@@ -64,7 +65,8 @@ function photographerHeader(photographer) {
 
 /////////////////// create photographers gallery ///////////////////
 
-function appendMediaToGallery(photographer, media, gallery) {
+function appendMediaToGallery(photographer, media) {
+  const gallery = document.getElementById("media-section");
   const mediaElement = document.createElement("article");
   const mediaLink = document.createElement("a");
   const mediaImg = document.createElement("img");
@@ -88,6 +90,7 @@ function appendMediaToGallery(photographer, media, gallery) {
   const mediaName = document.createElement("h2");
   const mediaLikes = document.createElement("button");
   const mediaLikesText = document.createElement("p");
+  mediaLikesText.id = "likes-number";
   const mediaHeart = document.createElement("img");
   mediaHeart.alt = "likes";
   mediaName.textContent = media.title;
@@ -105,22 +108,57 @@ function appendMediaToGallery(photographer, media, gallery) {
 
 /////////////////// sort by function ///////////////////
 
-function sortBy(gallery) {
-  const mediaGallery = gallery.querySelectorAll("img#media-image");
-  const option1 = document.querySelector("#sort-list #sort-by #option1").value;
-  const option2 = document.querySelector("#sort-list #sort-by #option2").value;
-  const option3 = document.querySelector("#sort-list #sort-by #option3").value;
-}
+function sortBy(photographerMedias) {
+  const option = document.querySelector("#sort-by").value;
 
-/////////////////// tag filter ///////////////////
+  if (option == "popularity") {
+    photographerMedias.sort(function (a, b) {
+      return b.likes - a.likes;
+    });
+  } else if (option == "date") {
+    photographerMedias.sort(function (a, b) {
+      let dateA = new Date(a.date),
+        dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+  } else if (option == "title") {
+    photographerMedias.sort(function (a, b) {
+      let titleA = a.title.toLowerCase(),
+        titleB = b.title.toLowerCase();
+      if (titleA < titleB) return -1;
+      if (titleA > titleB) return 1;
+      return 0;
+    });
+  }
+
+  const gallery = document.getElementById("media-section");
+  gallery.innerHTML = "";
+  photographerMedias.forEach(appendMediaToGallery);
+  console.log(appendMediaToGallery);
+}
 
 /////////////////// likes counter function on "photographes" page ///////////////////
 
-function like() {
-  let likes = document.querySelectorAll(
-    "#main-photographer #media-section article #media-text button span"
-  );
-  let totalLikes = document.querySelector("#main-photographer .popup-text span.number").textContent;
+function incrementLikes(photographerMedias) {
+  const domLikesSum = document.querySelector(".popup-text span.number");
+  const likesButton = document.querySelectorAll("#media-text button");
+  const mediaLikes = document.querySelectorAll("#media-text button p");
+
+  let imgLikes = [];
+  photographerMedias.forEach((media) => {
+    imgLikes.push(media.likes);
+  });
+
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  let likesSum = imgLikes.reduce(reducer);
+  domLikesSum.textContent = likesSum;
+
+  for (let i = 0; i < photographerMedias.length; i++) {
+    likesButton[i].addEventListener("click", () => {
+      mediaLikes[i].textContent = parseInt(mediaLikes[i].textContent) + 1;
+      domLikesSum.textContent = parseInt(domLikesSum.textContent) + 1;
+    });
+  }
 }
 
 /////////////////// form modal ///////////////////
