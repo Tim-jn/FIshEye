@@ -26,6 +26,11 @@ body > * {
   justify-content: center;
 }
 
+#tags-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
 #tags-list button {
   border: 0.5px solid #C4C4C4;
   border-radius: 11px;
@@ -38,6 +43,20 @@ body > * {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#tags-list li {
+  border: 0.5px solid #C4C4C4;
+  border-radius: 11px;
+  height: 22px;
+  color: #901C1C;
+  font-weight: 600;
+  background-color: #FFF;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
 }
 
 #artist #contact {
@@ -66,8 +85,8 @@ body > * {
     height: 69px;
     font-size: 20px;
     padding: 0;
-    bottom: 57%;
-    left: 50%;
+    bottom: 25%;
+    left: 60%;
   }
 }
 
@@ -161,8 +180,7 @@ body > * {
 @media all and (min-width: 992px) {
   #main-photographer #artist #tags-list #list-tags {
     font-size: 18px;
-    height: 24px;
-    width: 99px;
+    padding: 1px 10px;
     font-weight: 500;
   }
 }
@@ -604,7 +622,6 @@ header .text {
   justify-content: center;
   margin: 0 0 42px 0;
   gap: 5px;
-  padding: 0;
 }
 #main-index img {
   object-fit: cover;

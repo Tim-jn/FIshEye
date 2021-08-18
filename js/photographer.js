@@ -35,7 +35,7 @@ function photographerHeader(photographer) {
   localisation.id = "localisation";
   const tagline = document.createElement("p");
   tagline.id = "tagline";
-  const tagsList = document.createElement("nav");
+  const tagsList = document.createElement("ul");
   tagsList.id = "tags-list";
 
   profilePicture.src = "../photographersID/" + photographer.portrait;
@@ -47,7 +47,7 @@ function photographerHeader(photographer) {
 
   const tagList = photographer.tags;
   for (var j = 0; j < tagList.length; j++) {
-    const listTags = document.createElement("button");
+    const listTags = document.createElement("li");
     listTags.id = "list-tags";
     listTags.textContent = "#" + tagList[j];
     tagsList.appendChild(listTags);
@@ -175,8 +175,16 @@ function formModal(photographer) {
 
   formModalBtn.onclick = () => {
     formModalBg.style.display = "block";
+    document.getElementById("first").focus();
     disableBodyScroll(formModalBg);
   };
+
+  formModalBg.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      formModalBg.style.display = "none";
+      enableBodyScroll(formModalBg);
+    }
+  });
 
   closeFormBtn.onclick = () => {
     formModalBg.style.display = "none";

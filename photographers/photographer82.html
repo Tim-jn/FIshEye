@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css"/>
+    <title>FishEye - Photographes</title>
+</head>
+<body>
+    <input type="hidden" id="photographer-id" value="82" />
+    <header id="header" role="banner">
+        <a href ="../index.html">
+            <img src="../img/logo/logo.svg" alt="FishEye Home page" role="img">
+        </a>
+    </header>
+    <main id="main-photographer" role="main">
+        <section id="artist">
+            <button id="contact"></button>
+        </section>
+        <label for="sort-by" role="list" id="sort-list">Trier par</label>
+            <select name="sort" id="sort-by">
+                <option id="option" value="popularity" role="listitem">Popularité</option>
+                <option id="option" value="date" role="listitem">Date</option>
+                <option id="option" value="title" role="listitem">Titre</option>
+            </select>
+        
+        <section id="media-section">
+            <video id="media-video" controls type="video/mp4"></video>
+        </section>
+        <div class="popup-text" role="text">
+            <span class="likes-total"><span class="number"></span><img src="../img/logo/blackheart.png" alt="likes"></span>
+            <span class="rates">500€ / jour</span>
+        </div>
+        <div id="form-modal" class="bground">
+            <div class="content">
+                <button class="close"></button>
+                <div class="modal-body">
+                    <form name="reserve" id="reserve" class="reserve" action="" method="get">
+                <div class="form-text">
+                    <span>Contactez-moi</span></br>
+                </div>
+                <div class="formData">
+                    <label for="first">Prénom</label><br />
+                    <input class="text-control" type="text" id="first" name="first" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="last">Nom</label><br />
+                    <input class="text-control" type="text" id="last" name="last" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="email">E-mail</label><br />
+                    <input class="text-control" type="email" id="email" name="email" required/><br />
+                </div>
+                <div class="formData">
+                    <label for="message">Votre message</label><br />
+                    <textarea class="text-control message" type="text" id="message" name="message" rows="10" cols="50" required></textarea>
+                </div>
+                </div>
+                  <input class="btn-submit" type="submit" value="Envoyer" />
+                </form>
+            </div>
+        </div>
+    </main> 
+    <script type="module" src="../js/photographer.js"></script>
+</body>
+</html>

@@ -90,8 +90,7 @@
 
         @media all and (min-width: $breakpoint-desktop) {
           font-size: 18px;
-          height: 24px;
-          width: 99px;
+          padding: 1px 10px;
           font-weight: 500;
         }
       }
@@ -102,7 +101,7 @@
     font-weight: 700;
     font-size: 18px;
   }
-  
+
   #sort-by {
     background-color: $color-primary;
     color: #fff;

@@ -1,102 +1,99 @@
 header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 
+  @media all and (min-width: $breakpoint-desktop) {
+    flex-wrap: nowrap;
+    gap: 50px;
+  }
+
+  #medias-tags {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    order: 3;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    gap: 5px;
+    margin-top: 38px;
 
     @media all and (min-width: $breakpoint-desktop) {
-        flex-wrap: nowrap;
-        gap: 50px;
+      order: unset;
+      margin-top: 0;
+      min-width: 290px;
     }
+  }
 
-    #medias-tags {
-        display: flex;
-        justify-content: center;
-        order: 3;
-        flex-wrap: wrap;
-        width: 100%;
-        gap: 5px;
-        margin-top: 38px;
+  .text {
+    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-primary;
 
-        @media all and (min-width: $breakpoint-desktop) {
-            order: unset;
-            margin-top: 0;
-            min-width: 290px;
-        }
+    @media all and (min-width: $breakpoint-desktop) {
+      font-size: 36px;
+      white-space: nowrap;
+      margin: 0;
     }
-
-    .text {
-        font-weight: 400;
-        font-size: 14px;
-        font-weight: 500;
-        color: $color-primary;
-
-        @media all and (min-width: $breakpoint-desktop) {
-            font-size: 36px;
-            white-space: nowrap;
-            margin: 0;
-        }
-    }
+  }
 }
 
 #main-index {
+  @media all and (min-width: $breakpoint-desktop) {
+    display: grid;
+    grid-template-columns: repeat(3, 301px);
+    max-width: 100%;
+    justify-content: space-between;
+    margin-top: 100px;
+  }
 
-    @media all and (min-width: $breakpoint-desktop) {
-        display: grid;
-        grid-template-columns: repeat(3, 301px);
-        max-width: 100%; 
-        justify-content: space-between;
-        margin-top: 100px;
+  article {
+    text-align: center;
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    article {
-        text-align: center;
-
-        a {
-            cursor: pointer;
-            text-decoration: none;
-        }   
-
-        h2 {
-            color: $color-artists-name;
-            font-weight: 400;
-            font-size: 36px;
-            margin: 20px 0 0 0;
-        }
-
-        #localisation {
-            color: $color-primary;
-            font-size: 13px;
-            margin: 0 0 3px 0;
-        }
-
-        #tagline {
-            font-size: 10px;
-            margin: 0 0 3px 0;
-        }
-
-        #price {
-            font-size: 9px;
-            color: #757575;
-            margin: 3px 0 6px 0;
-        }
-
-        #tags-list {
-            display: flex;
-            justify-content: center;
-            margin: 0 0 42px 0;
-            gap: 5px;
-            padding: 0;
-        }
+    h2 {
+      color: $color-artists-name;
+      font-weight: 400;
+      font-size: 36px;
+      margin: 20px 0 0 0;
     }
 
-    img {
-        object-fit: cover;
-        border-radius: 100%;
-        height: 200px;
-        width: 200px;
-        box-shadow: $profile-picture-shadow;
+    #localisation {
+      color: $color-primary;
+      font-size: 13px;
+      margin: 0 0 3px 0;
     }
+
+    #tagline {
+      font-size: 10px;
+      margin: 0 0 3px 0;
+    }
+
+    #price {
+      font-size: 9px;
+      color: #757575;
+      margin: 3px 0 6px 0;
+    }
+
+    #tags-list {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 42px 0;
+      gap: 5px;
+    }
+  }
+
+  img {
+    object-fit: cover;
+    border-radius: 100%;
+    height: 200px;
+    width: 200px;
+    box-shadow: $profile-picture-shadow;
+  }
 }
