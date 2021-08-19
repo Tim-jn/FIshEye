@@ -66,10 +66,11 @@ function photographerNodeFactory(photographer, photographers) {
   price.id = "price";
   const tagsList = document.createElement("span");
   tagsList.id = "tags-list";
+  tagsList.setAttribute("aria-label", "Tags");
 
   urlPhotographer.href = "./photographers/photographer" + photographer.id + ".html";
   profilePicture.src = "./photographersID/" + photographer.portrait;
-  profilePicture.alt = "";
+  profilePicture.alt = photographer.name;
   photographerName.textContent = photographer.name;
   localisation.textContent = photographer.city + ", " + photographer.country;
   tagline.textContent = photographer.tagline;

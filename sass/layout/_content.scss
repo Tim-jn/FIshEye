@@ -1,3 +1,27 @@
+// shared top popup
+
+.content-link {
+  transition: transform 0.3s;
+  background: #911c1c;
+  color: #fff;
+  font-weight: 700;
+  left: 41%;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  transform: translateY(-400%);
+  text-decoration: none;
+
+  &:focus {
+    background-color: $color-secondary;
+    color: #000;
+  }
+}
+
+.content-link:focus-within {
+  transform: translateY(-250%);
+}
+
 // shared header
 
 #header {
@@ -19,6 +43,7 @@
 
   #artist {
     position: relative;
+    margin-bottom: 30px;
 
     @media all and (min-width: 576px) {
       background-color: $color-tertiary-background;
@@ -47,10 +72,12 @@
       font-weight: 400;
       font-size: 36px;
       margin: 20px 0 0 0;
+      max-width: 200px;
 
       @media all and (min-width: $breakpoint-desktop) {
         font-size: 64px;
         margin: 0;
+        max-width: 100%;
       }
     }
 
@@ -97,23 +124,29 @@
     }
   }
 
-  #sort-list {
-    font-weight: 700;
-    font-size: 18px;
-  }
+  #dropdown {
+    @media all and (max-width: $breakpoint-desktop) {
+      display: none;
+    }
 
-  #sort-by {
-    background-color: $color-primary;
-    color: #fff;
-    border: none;
-    height: 60px;
-    width: 170px;
-    border-radius: 5px;
-    margin: 9px 0 48px 25px;
-    font-size: 18px;
-
-    > * {
+    #sort-list {
+      font-weight: 700;
       font-size: 18px;
+    }
+
+    #sort-by {
+      background-color: $color-primary;
+      color: #fff;
+      border: none;
+      height: 60px;
+      width: 170px;
+      border-radius: 5px;
+      margin: 9px 0 48px 25px;
+      font-size: 18px;
+
+      > * {
+        font-size: 18px;
+      }
     }
   }
 

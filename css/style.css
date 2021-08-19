@@ -13,17 +13,21 @@ body > * {
 }
 
 #medias-tags button {
-  border: 0.5px solid #C4C4C4;
+  border: 0.5px solid #c4c4c4;
   border-radius: 11px;
   height: 22px;
   color: #901C1C;
   font-weight: 600;
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#medias-tags button:hover, #medias-tags button:focus {
+  background-color: #901C1C;
+  color: #fff;
 }
 
 #tags-list {
@@ -32,31 +36,40 @@ body > * {
   padding: 0;
 }
 #tags-list button {
-  border: 0.5px solid #C4C4C4;
+  border: 0.5px solid #c4c4c4;
   border-radius: 11px;
   height: 22px;
   color: #901C1C;
   font-weight: 600;
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+#tags-list button:hover, #tags-list button:focus {
+  background-color: #901C1C;
+  color: #fff;
+}
 #tags-list li {
-  border: 0.5px solid #C4C4C4;
+  border: 0.5px solid #c4c4c4;
   border-radius: 11px;
   height: 22px;
   color: #901C1C;
   font-weight: 600;
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: default;
+  padding: 0 5px;
+}
+#tags-list li:hover, #tags-list li:focus {
+  background-color: #901C1C;
+  color: #fff;
 }
 
 #artist #contact {
@@ -90,6 +103,27 @@ body > * {
   }
 }
 
+.content-link {
+  transition: transform 0.3s;
+  background: #911c1c;
+  color: #fff;
+  font-weight: 700;
+  left: 41%;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  transform: translateY(-400%);
+  text-decoration: none;
+}
+.content-link:focus {
+  background-color: #DB8876;
+  color: #000;
+}
+
+.content-link:focus-within {
+  transform: translateY(-250%);
+}
+
 #header img {
   width: 150px;
   height: 37.5px;
@@ -106,6 +140,7 @@ body > * {
 }
 #main-photographer #artist {
   position: relative;
+  margin-bottom: 30px;
 }
 @media all and (min-width: 576px) {
   #main-photographer #artist {
@@ -135,11 +170,13 @@ body > * {
   font-weight: 400;
   font-size: 36px;
   margin: 20px 0 0 0;
+  max-width: 200px;
 }
 @media all and (min-width: 992px) {
   #main-photographer #artist h2 {
     font-size: 64px;
     margin: 0;
+    max-width: 100%;
   }
 }
 #main-photographer #artist #localisation {
@@ -184,11 +221,16 @@ body > * {
     font-weight: 500;
   }
 }
-#main-photographer #sort-list {
+@media all and (max-width: 992px) {
+  #main-photographer #dropdown {
+    display: none;
+  }
+}
+#main-photographer #dropdown #sort-list {
   font-weight: 700;
   font-size: 18px;
 }
-#main-photographer #sort-by {
+#main-photographer #dropdown #sort-by {
   background-color: #901C1C;
   color: #fff;
   border: none;
@@ -198,7 +240,7 @@ body > * {
   margin: 9px 0 48px 25px;
   font-size: 18px;
 }
-#main-photographer #sort-by > * {
+#main-photographer #dropdown #sort-by > * {
   font-size: 18px;
 }
 #main-photographer #media-section {
@@ -479,7 +521,6 @@ body > * {
   border: none;
   position: fixed;
   cursor: pointer;
-  text-indent: 3000px;
   top: 50%;
   right: 20px;
   height: 16px;
@@ -500,7 +541,6 @@ body > * {
   border: none;
   position: fixed;
   cursor: pointer;
-  text-indent: 3000px;
   left: 20px;
   top: 50%;
   height: 16px;
@@ -521,7 +561,6 @@ body > * {
   border: none;
   position: fixed;
   cursor: pointer;
-  text-indent: 3000px;
   height: 12px;
   top: 36.5%;
   right: 20px;

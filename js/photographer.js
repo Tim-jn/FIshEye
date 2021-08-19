@@ -17,7 +17,7 @@ async function init() {
   photographerMedias.forEach((media) => appendMediaToGallery(photographer, media));
 
   formModal(photographer);
-  lightbox.init();
+  lightbox.init(photographerMedias);
   document.querySelector("#sort-by").addEventListener("change", () => sortBy(photographerMedias));
   incrementLikes(photographerMedias);
 }
@@ -37,9 +37,10 @@ function photographerHeader(photographer) {
   tagline.id = "tagline";
   const tagsList = document.createElement("ul");
   tagsList.id = "tags-list";
+  tagsList.setAttribute("aria-label", "Tags");
 
   profilePicture.src = "../photographersID/" + photographer.portrait;
-  profilePicture.alt = "";
+  profilePicture.alt = photographer.name;
   photographerName.textContent = photographer.name;
   localisation.textContent = photographer.city + ", " + photographer.country;
   tagline.textContent = photographer.tagline;
@@ -74,12 +75,13 @@ function appendMediaToGallery(photographer, media) {
 
   if (media.image) {
     mediaImg.id = "media-image";
-    mediaImg.alt = media.alt;
+    mediaImg.alt = media.alt + ", closeup view";
     mediaImg.src = "../img/photos/" + photographer.name + "/" + media.image;
     mediaLink.href = "../img/photos/" + photographer.name + "/" + media.image;
     mediaLink.appendChild(mediaImg);
   } else if (media.video) {
     mediaVideo.id = "media-video";
+    mediaVideo.setAttribute("aria-label", media.alt + ", closeup view");
     mediaVideo.src = "../img/photos/" + photographer.name + "/" + media.video;
     mediaLink.href = "../img/photos/" + photographer.name + "/" + media.video;
     mediaLink.appendChild(mediaVideo);
@@ -108,6 +110,8 @@ function appendMediaToGallery(photographer, media) {
 
 /////////////////// sort by function ///////////////////
 
+// récupérer les données
+
 function sortBy(photographerMedias) {
   const option = document.querySelector("#sort-by").value;
 
@@ -134,7 +138,6 @@ function sortBy(photographerMedias) {
   const gallery = document.getElementById("media-section");
   gallery.innerHTML = "";
   photographerMedias.forEach(appendMediaToGallery);
-  console.log(appendMediaToGallery);
 }
 
 /////////////////// likes counter function on "photographes" page ///////////////////
@@ -195,7 +198,7 @@ function formModal(photographer) {
 /////////////////// lightbox modal ///////////////////
 
 class lightbox {
-  static init() {
+  static init(photographerMedias) {
     const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
     const gallery = links.map((link) => link.getAttribute("href"));
     links.forEach((link) =>
@@ -216,12 +219,22 @@ class lightbox {
     document.addEventListener("keyup", this.onKeyUp.bind(this));
   }
 
-  loadImage(url) {
+  // récupérer le données
+
+  loadImage(url, photographerMedias) {
     const image = new Image();
     const video = document.createElement("video");
+    /*const mediaName = document.createElement("h2");
+    mediaName.textContent = photographerMedias.name;
+    container.appendChild(mediaName);
+    image.alt = media.alt;
+    video.setAttribute("aria-label", photographerMedias.alt);*/
     const container = this.element.querySelector(".lightbox-container");
     container.innerHTML = "";
     this.url = url;
+
+    console.log(photographerMedias);
+
     if (url.includes("jpg")) {
       container.appendChild(image);
       image.src = url;
@@ -273,10 +286,10 @@ class lightbox {
   buildDOM(url) {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
-    dom.innerHTML = `<button class="close">Fermer</button>
-        <button class="next">Suivant</button>
-        <button class="prev">Précédent</button>
-        <div class="lightbox-container">
+    dom.innerHTML = `<button class="close" aria-label="Close dialog"></button>
+        <button class="next" aria-label="Next image" ></button>
+        <button class="prev" aria-label="Previous image"></button>
+        <div class="lightbox-container" aria-label= "image closeup view">
         </div>`;
     dom.querySelector(".close").addEventListener("click", this.close.bind(this));
     dom.querySelector(".next").addEventListener("click", this.next.bind(this));

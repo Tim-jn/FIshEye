@@ -1,36 +1,41 @@
 // breakpoints
 
 @mixin display-hidden {
-    @media all and (min-width: $breakpoint-desktop) {
-        display: none;
-    } 
+  @media all and (min-width: $breakpoint-desktop) {
+    display: none;
+  }
 }
 
 // filters buttons
 
 @mixin filters-button {
-    border: 0.5px solid #C4C4C4;
-    border-radius: 11px;
-    height: 22px;
-    color:  $color-primary;
-    font-weight: 600;
-    background-color: #FFF;
-    font-size: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: 0.5px solid #c4c4c4;
+  border-radius: 11px;
+  height: 22px;
+  color: $color-primary;
+  font-weight: 600;
+  background-color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover,
+  &:focus {
+    background-color: $color-primary;
+    color: #fff;
+  }
 }
 
 // lightbox
 
 @mixin lightbox-buttons {
-    width: 12px;
-    border: none;
-    position: fixed;
-    cursor: pointer;
-    text-indent: 3000px;
-    &:hover {
-      transform: scale(1.1);
-    }
+  width: 12px;
+  border: none;
+  position: fixed;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
