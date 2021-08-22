@@ -13,13 +13,20 @@ async function init() {
 
   let medias = await getMedias();
   const photographer = photographers.find((photographer) => photographer.id === photographerId);
-  const photographerMedias = medias.filter((item) => item.photographerId === photographerId);
+  let photographerMedias = medias.filter((item) => item.photographerId === photographerId);
   photographerMedias.forEach((media) => appendMediaToGallery(photographer, media));
 
   formModal(photographer);
-  lightbox.init(photographerMedias);
-  document.querySelector("#sort-by").addEventListener("change", () => sortBy(photographerMedias));
-  incrementLikes(photographerMedias);
+  lightbox.init();
+  document.querySelector("#sort-by").addEventListener("change", () => {
+    photographerMedias = sortBy(photographerMedias);
+    const gallery = document.getElementById("media-section");
+    gallery.innerHTML = "";
+    likesArray.splice(0, likesArray.length);
+    photographerMedias.forEach((media) => {
+      appendMediaToGallery(photographer, media);
+    });
+  });
 }
 
 init();
@@ -66,12 +73,14 @@ function photographerHeader(photographer) {
 
 /////////////////// create photographers gallery ///////////////////
 
+let likesArray = [];
+
 function appendMediaToGallery(photographer, media) {
   const gallery = document.getElementById("media-section");
   const mediaElement = document.createElement("article");
   const mediaLink = document.createElement("a");
   const mediaImg = document.createElement("img");
-  const mediaVideo = document.getElementById("media-video");
+  const mediaVideo = document.createElement("video");
 
   if (media.image) {
     mediaImg.id = "media-image";
@@ -81,6 +90,7 @@ function appendMediaToGallery(photographer, media) {
     mediaLink.appendChild(mediaImg);
   } else if (media.video) {
     mediaVideo.id = "media-video";
+    mediaVideo.setAttribute("controls", "true");
     mediaVideo.setAttribute("aria-label", media.alt + ", closeup view");
     mediaVideo.src = "../img/photos/" + photographer.name + "/" + media.video;
     mediaLink.href = "../img/photos/" + photographer.name + "/" + media.video;
@@ -106,11 +116,23 @@ function appendMediaToGallery(photographer, media) {
   mediaText.appendChild(mediaLikes);
   mediaLikes.appendChild(mediaHeart);
   gallery.appendChild(mediaElement);
+
+  // likes increment
+
+  const domLikesSum = document.querySelector(".popup-text span.number");
+  const mediaLikesTextContent = media.likes;
+  likesArray.push(mediaLikesTextContent);
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const likesSum = likesArray.reduce(reducer);
+  domLikesSum.textContent = likesSum;
+
+  mediaLikes.addEventListener("click", () => {
+    mediaLikesText.textContent = parseInt(mediaLikesText.textContent) + 1;
+    domLikesSum.textContent = parseInt(domLikesSum.textContent) + 1;
+  });
 }
 
 /////////////////// sort by function ///////////////////
-
-// récupérer les données
 
 function sortBy(photographerMedias) {
   const option = document.querySelector("#sort-by").value;
@@ -135,33 +157,7 @@ function sortBy(photographerMedias) {
     });
   }
 
-  const gallery = document.getElementById("media-section");
-  gallery.innerHTML = "";
-  photographerMedias.forEach(appendMediaToGallery);
-}
-
-/////////////////// likes counter function on "photographes" page ///////////////////
-
-function incrementLikes(photographerMedias) {
-  const domLikesSum = document.querySelector(".popup-text span.number");
-  const likesButton = document.querySelectorAll("#media-text button");
-  const mediaLikes = document.querySelectorAll("#media-text button p");
-
-  let imgLikes = [];
-  photographerMedias.forEach((media) => {
-    imgLikes.push(media.likes);
-  });
-
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  let likesSum = imgLikes.reduce(reducer);
-  domLikesSum.textContent = likesSum;
-
-  for (let i = 0; i < photographerMedias.length; i++) {
-    likesButton[i].addEventListener("click", () => {
-      mediaLikes[i].textContent = parseInt(mediaLikes[i].textContent) + 1;
-      domLikesSum.textContent = parseInt(domLikesSum.textContent) + 1;
-    });
-  }
+  return photographerMedias;
 }
 
 /////////////////// form modal ///////////////////
@@ -198,7 +194,7 @@ function formModal(photographer) {
 /////////////////// lightbox modal ///////////////////
 
 class lightbox {
-  static init(photographerMedias) {
+  static init() {
     const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
     const gallery = links.map((link) => link.getAttribute("href"));
     links.forEach((link) =>
@@ -219,22 +215,15 @@ class lightbox {
     document.addEventListener("keyup", this.onKeyUp.bind(this));
   }
 
-  // récupérer le données
-
-  loadImage(url, photographerMedias) {
+  loadImage(url) {
+    const title = document.createElement("h2");
     const image = new Image();
     const video = document.createElement("video");
-    /*const mediaName = document.createElement("h2");
-    mediaName.textContent = photographerMedias.name;
-    container.appendChild(mediaName);
-    image.alt = media.alt;
-    video.setAttribute("aria-label", photographerMedias.alt);*/
+    title.innerHTML = this.getFormatedTitle(url);
+    image.alt = this.getFormatedTitle(url);
     const container = this.element.querySelector(".lightbox-container");
     container.innerHTML = "";
     this.url = url;
-
-    console.log(photographerMedias);
-
     if (url.includes("jpg")) {
       container.appendChild(image);
       image.src = url;
@@ -243,6 +232,14 @@ class lightbox {
       video.controls = true;
       video.src = url;
     }
+    container.appendChild(title);
+  }
+
+  getFormatedTitle(path) {
+    const splitedPath = path.split("/");
+    const string = splitedPath[splitedPath.length - 1].split(".")[0];
+    const formatedTitle = string.replaceAll("_", " ");
+    return formatedTitle;
   }
 
   onKeyUp(e) {
@@ -289,8 +286,7 @@ class lightbox {
     dom.innerHTML = `<button class="close" aria-label="Close dialog"></button>
         <button class="next" aria-label="Next image" ></button>
         <button class="prev" aria-label="Previous image"></button>
-        <div class="lightbox-container" aria-label= "image closeup view">
-        </div>`;
+        <div class="lightbox-container" aria-label= "image closeup view"></div>`;
     dom.querySelector(".close").addEventListener("click", this.close.bind(this));
     dom.querySelector(".next").addEventListener("click", this.next.bind(this));
     dom.querySelector(".prev").addEventListener("click", this.prev.bind(this));
