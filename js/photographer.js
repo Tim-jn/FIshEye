@@ -26,10 +26,26 @@ async function init() {
     photographerMedias.forEach((media) => {
       appendMediaToGallery(photographer, media);
     });
+    lightbox.init();
   });
 }
 
 init();
+
+/////////////////// go to content button ///////////////////
+
+window.onscroll = function () {
+  goToContent();
+};
+
+function goToContent() {
+  const contentButton = document.querySelector(".content-link");
+  if (document.documentElement.scrollTop > 400) {
+    contentButton.style.transform = "translateY(-250%)";
+  } else if (document.documentElement.scrollTop < 450) {
+    contentButton.style.transform = "translateY(-400%)";
+  }
+}
 
 /////////////////// create photographers header ///////////////////
 
@@ -286,7 +302,7 @@ class lightbox {
     dom.innerHTML = `<button class="close" aria-label="Close dialog"></button>
         <button class="next" aria-label="Next image" ></button>
         <button class="prev" aria-label="Previous image"></button>
-        <div class="lightbox-container" aria-label= "image closeup view"></div>`;
+        <div class="lightbox-container" aria-label="image closeup view"></div>`;
     dom.querySelector(".close").addEventListener("click", this.close.bind(this));
     dom.querySelector(".next").addEventListener("click", this.next.bind(this));
     dom.querySelector(".prev").addEventListener("click", this.prev.bind(this));
