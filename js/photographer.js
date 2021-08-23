@@ -299,6 +299,7 @@ class lightbox {
   buildDOM(url) {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
+    dom.setAttribute("role", "dialog");
     dom.innerHTML = `<button class="close" aria-label="Close dialog"></button>
         <button class="next" aria-label="Next image" ></button>
         <button class="prev" aria-label="Previous image"></button>

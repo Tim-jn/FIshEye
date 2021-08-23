@@ -10,57 +10,57 @@
 </head>
 <body>
     <a class="content-link" tabindex="1" href="#media-section">Passer au contenu</a>
-    <input type="hidden" id="photographer-id" value="195" />
-    <header id="header" role="banner">
+    <input type="hidden" id="photographer-id" value="243" />
+    <header id="header">
         <a href ="../index.html">
-            <img src="../img/logo/logo.svg" alt="FishEye Home page" role="img">
+            <img src="../img/logo/logo.svg" alt="FishEye Home page">
         </a>
     </header>
-    <main id="main-photographer" role="main">
+    <main id="main-photographer">
         <section id="artist">
             <button id="contact" aria-label="Contact Me"></button>
         </section>
         <div id="dropdown">
             <label for="sort-by" id="sort-list">Trier par</label>
                 <select name="sort" id="sort-by" aria-label="Order by">
-                    <option value="date" role="listitem">Date</option>
-                    <option value="popularity" role="listitem">Popularité</option>
-                    <option value="title" role="listitem">Titre</option>
+                    <option value="date">Date</option>
+                    <option value="popularity">Popularité</option>
+                    <option value="title">Titre</option>
                 </select>
         </div>
         <section id="media-section">
         </section>
-        <div class="popup-text" role="text">
+        <div class="popup-text">
             <span class="likes-total"><span class="number"></span><img src="../img/logo/blackheart.png" alt="likes"></span>
             <span class="rates">300€ / jour</span>
         </div>
-        <div id="form-modal" class="bground" aria-label="Contact Me">
+        <div id="form-modal" class="bground" role="dialog">
             <div class="content">
                 <button class="close" aria-label="Close Contact form"></button>
                 <div class="modal-body">
-                    <form name="reserve" id="reserve" class="reserve" action="" method="get">
-                <div class="form-text">
-                    <span>Contactez-moi</span></br>
+                    <form name="reserve" id="reserve" class="reserve" action="#" method="get">
+                        <div class="form-text">
+                            <span>Contactez-moi</span><br />
+                        </div>
+                        <div class="formData">
+                            <label for="first">Prénom</label><br />
+                            <input class="text-control" type="text" id="first" name="first" aria-label="First name" required/><br />
+                        </div>
+                        <div class="formData">
+                            <label for="last">Nom</label><br />
+                            <input class="text-control" type="text" id="last" name="last" aria-label="Last name" required/><br />
+                        </div>
+                        <div class="formData">
+                            <label for="email">E-mail</label><br />
+                            <input class="text-control" type="email" id="email" name="email" aria-label="Email" required/><br />
+                        </div>
+                        <div class="formData">
+                            <label for="message">Votre message</label><br />
+                            <textarea class="text-control message" id="message" name="message" rows="10" cols="50" aria-label="Your message" required></textarea>
+                        </div>
+                        <input class="btn-submit" type="submit" value="Envoyer" aria-label="Send"/>
+                    </form>
                 </div>
-                <div class="formData">
-                    <label for="first">Prénom</label><br />
-                    <input class="text-control" type="text" id="first" name="first" aria-label="First name" required/><br />
-                </div>
-                <div class="formData">
-                    <label for="last">Nom</label><br />
-                    <input class="text-control" type="text" id="last" name="last" aria-label="Last name" required/><br />
-                </div>
-                <div class="formData">
-                    <label for="email">E-mail</label><br />
-                    <input class="text-control" type="email" id="email" name="email" aria-label="Email" required/><br />
-                </div>
-                <div class="formData">
-                    <label for="message">Votre message</label><br />
-                    <textarea class="text-control message" type="text" id="message" name="message" rows="10" cols="50" aria-label="Your message" required></textarea>
-                </div>
-                </div>
-                  <input class="btn-submit" type="submit" value="Envoyer" aria-label="Send"/>
-                </form>
             </div>
         </div>
     </main> 
