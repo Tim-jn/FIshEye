@@ -16,9 +16,9 @@ async function init() {
   let photographerMedias = medias.filter((item) => item.photographerId === photographerId);
   photographerMedias.forEach((media) => appendMediaToGallery(photographer, media));
 
+  initLightbox();
   likesIncrement(photographerMedias);
   formModal(photographer);
-  lightbox.init();
   document.querySelector("#sort-by").addEventListener("change", () => {
     photographerMedias = sortBy(photographerMedias);
     const gallery = document.getElementById("media-section");
@@ -27,8 +27,8 @@ async function init() {
     photographerMedias.forEach((media) => {
       appendMediaToGallery(photographer, media);
     });
-    lightbox.init();
-    likesIncrement(photographerMedias);
+    initLightbox(photographer, media);
+    likesIncrement();
   });
 }
 
@@ -120,7 +120,7 @@ class ImageMedia {
   createCard() {
     return `
   <article>
-    <a href="${this.name}/${this.image}">
+    <a href="../img/photos/${this.name}/${this.image}">
       <img id="media-image" alt="${this.alt}" src="../img/photos/${this.name}/${this.image}">
     </a>
     <div id="media-text">
@@ -147,7 +147,7 @@ class VideoMedia {
   createCard() {
     return `
   <article>
-    <a href="${this.name}/${this.video}">
+    <a href="../img/photos/${this.name}/${this.video}">
       <video id="media-video" controls="true" aria-label="${this.alt} + ", closeup view"" src="../img/photos/${this.name}/${this.video}">
     </a>
     <div id="media-text">
@@ -303,18 +303,18 @@ function formModal(photographer) {
 
 /////////////////// lightbox modal ///////////////////
 
-class lightbox {
-  static init() {
-    const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
-    const gallery = links.map((link) => link.getAttribute("href"));
-    links.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        new lightbox(e.currentTarget.getAttribute("href"), gallery);
-      })
-    );
-  }
+function initLightbox() {
+  const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
+  const gallery = links.map((link) => link.getAttribute("href"));
+  links.forEach((link) =>
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      new LightboxFactory(e.currentTarget.getAttribute("href"), gallery);
+    })
+  );
+}
 
+class LightboxFactory {
   constructor(url, images) {
     this.element = this.buildDOM(url);
     this.images = images;
@@ -326,18 +326,20 @@ class lightbox {
   }
 
   loadImage(url) {
-    const title = document.createElement("h2");
-    const image = new Image();
-    const video = document.createElement("video");
-    title.innerHTML = this.getFormatedTitle(url);
-    image.alt = this.getFormatedTitle(url);
     const container = this.element.querySelector(".lightbox-container");
     container.innerHTML = "";
+
+    const title = document.createElement("h2");
+    title.innerHTML = this.getFormatedTitle(url);
     this.url = url;
     if (url.includes("jpg")) {
+      const image = new Image();
+      image.alt = this.getFormatedTitle(url);
       container.appendChild(image);
       image.src = url;
     } else if (url.includes("mp4")) {
+      const video = document.createElement("video");
+      video.setAttribute("aria-label", this.getFormatedTitle(url));
       container.appendChild(video);
       video.controls = true;
       video.src = url;
