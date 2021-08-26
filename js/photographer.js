@@ -16,6 +16,7 @@ async function init() {
   let photographerMedias = medias.filter((item) => item.photographerId === photographerId);
   photographerMedias.forEach((media) => appendMediaToGallery(photographer, media));
 
+  likesIncrement(photographerMedias);
   formModal(photographer);
   lightbox.init();
   document.querySelector("#sort-by").addEventListener("change", () => {
@@ -27,6 +28,7 @@ async function init() {
       appendMediaToGallery(photographer, media);
     });
     lightbox.init();
+    likesIncrement(photographerMedias);
   });
 }
 
@@ -93,6 +95,98 @@ let likesArray = [];
 
 function appendMediaToGallery(photographer, media) {
   const gallery = document.getElementById("media-section");
+  let medias = new MediaFactory(photographer, media);
+  gallery.innerHTML += medias.createCard(photographer, media);
+}
+
+class MediaFactory {
+  constructor(photographer, media) {
+    if (media.image) {
+      return new ImageMedia(photographer, media);
+    } else if (media.video) {
+      return new VideoMedia(photographer, media);
+    }
+  }
+}
+class ImageMedia {
+  constructor(photographer, media) {
+    this.name = photographer.name;
+    this.image = media.image;
+    this.alt = media.alt;
+    this.title = media.title;
+    this.likes = media.likes;
+  }
+
+  createCard() {
+    return `
+  <article>
+    <a href="${this.name}/${this.image}">
+      <img id="media-image" alt="${this.alt}" src="../img/photos/${this.name}/${this.image}">
+    </a>
+    <div id="media-text">
+      <h2>${this.title}</h2>
+      <button type="button" id="likes-button">
+        <p id="likes-number">${this.likes}</p>
+        <img alt="likes" src="../img/logo/heart.png">
+      </button>
+    </div>
+  </article>
+  `;
+  }
+}
+
+class VideoMedia {
+  constructor(photographer, media) {
+    this.name = photographer.name;
+    this.video = media.video;
+    this.alt = media.alt;
+    this.title = media.title;
+    this.likes = media.likes;
+  }
+
+  createCard() {
+    return `
+  <article>
+    <a href="${this.name}/${this.video}">
+      <video id="media-video" controls="true" aria-label="${this.alt} + ", closeup view"" src="../img/photos/${this.name}/${this.video}">
+    </a>
+    <div id="media-text">
+      <h2>${this.title}</h2>
+      <button type="button" id="likes-button">
+        <p id="likes-number">${this.likes}</p>
+        <img alt="likes" src="../img/logo/heart.png">
+      </button>
+    </div>
+  </article>
+  `;
+  }
+}
+
+function likesIncrement(photographerMedias) {
+  const domLikesSum = document.querySelector(".popup-text span.number");
+
+  photographerMedias.forEach((media) => {
+    let mediaLikesTextContent = media.likes;
+    likesArray.push(mediaLikesTextContent);
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const likesSum = likesArray.reduce(reducer);
+    domLikesSum.textContent = likesSum;
+  });
+
+  const mediaLikes = document.querySelectorAll("#likes-number");
+
+  for (let i = 0; i < mediaLikes.length; i++) {
+    mediaLikes[i].addEventListener("click", () => {
+      mediaLikes[i].textContent = parseInt(mediaLikes[i].textContent) + 1;
+      domLikesSum.textContent = parseInt(domLikesSum.textContent) + 1;
+    });
+  }
+}
+
+// The following code has been revised to conform to the evaluation criteria
+
+/*function appendMediaToGallery(photographer, media) {
+  const gallery = document.getElementById("media-section");
   const mediaElement = document.createElement("article");
   const mediaLink = document.createElement("a");
   const mediaImg = document.createElement("img");
@@ -146,7 +240,7 @@ function appendMediaToGallery(photographer, media) {
     mediaLikesText.textContent = parseInt(mediaLikesText.textContent) + 1;
     domLikesSum.textContent = parseInt(domLikesSum.textContent) + 1;
   });
-}
+}*/
 
 /////////////////// sort by function ///////////////////
 
@@ -307,7 +401,6 @@ class lightbox {
     dom.querySelector(".close").addEventListener("click", this.close.bind(this));
     dom.querySelector(".next").addEventListener("click", this.next.bind(this));
     dom.querySelector(".prev").addEventListener("click", this.prev.bind(this));
-  
 
     return dom;
   }
