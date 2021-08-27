@@ -27,8 +27,8 @@ async function init() {
     photographerMedias.forEach((media) => {
       appendMediaToGallery(photographer, media);
     });
-    initLightbox(photographer, media);
-    likesIncrement();
+    initLightbox();
+    likesIncrement(photographerMedias);
   });
 }
 
@@ -315,17 +315,23 @@ function initLightbox() {
 }
 
 class LightboxFactory {
-  constructor(url, images) {
+  constructor(url, medias) {
+    return new LightboxMedia(url, medias);
+  }
+}
+
+class LightboxMedia {
+  constructor(url, medias) {
     this.element = this.buildDOM(url);
-    this.images = images;
-    this.loadImage(url);
+    this.medias = medias;
+    this.loadMedia(url);
     this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
     disableBodyScroll(this.element);
     document.addEventListener("keyup", this.onKeyUp.bind(this));
   }
 
-  loadImage(url) {
+  loadMedia(url) {
     const container = this.element.querySelector(".lightbox-container");
     container.innerHTML = "";
 
@@ -376,20 +382,20 @@ class LightboxFactory {
 
   next(e) {
     e.preventDefault();
-    let i = this.images.findIndex((image) => image === this.url);
-    if (i === this.images.length - 1) {
+    let i = this.medias.findIndex((media) => media === this.url);
+    if (i === this.medias.length - 1) {
       i = -1;
     }
-    this.loadImage(this.images[i + 1]);
+    this.loadMedia(this.medias[i + 1]);
   }
 
   prev(e) {
     e.preventDefault();
-    let i = this.images.findIndex((image) => image === this.url);
+    let i = this.medias.findIndex((media) => media === this.url);
     if (i === 0) {
-      i = this.images.length;
+      i = this.medias.length;
     }
-    this.loadImage(this.images[i - 1]);
+    this.loadMedia(this.medias[i - 1]);
   }
 
   buildDOM(url) {
