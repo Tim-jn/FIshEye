@@ -1,7 +1,7 @@
-# EyeFish
+# FishEye
 Créez un site accessible pour une plateforme de photographes
 
-## [Live demo](https://eyefish.netlify.app/)
+## [Live demo](https://timjn-fisheye.netlify.app/)
 
 ## Languages utilisés 
  - HTML
